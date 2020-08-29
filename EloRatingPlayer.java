@@ -6,23 +6,18 @@ package com.svman4.ratingSystem.eloRatingSystem;
 
 /**
  * @author Manos Gerakianakis
- *
+ * @version 1.0.0
+ * @date 29/08/2020
  */
 public interface EloRatingPlayer {
 	/**
-	 * Επιστρέφει την βαθμολογία Elo για αυτό τον παίχτη.
+	 * Return elo rating
 	 * @return
 	 */
 	public int getEloRating();
-
-	/**
-	 * @param elo1
-	 */
 	public void setEloRating(int elo1);
 
-	/**
-	 * @return
-	 */
 	public int getK_Factor();
-
-}
+	
+	public void setK_factor(int k_factor);
+} // end of interface EloRatingPlayer()

@@ -69,6 +69,10 @@ public class eloCalculatorTest {
 			@Override
 			public int getK_Factor() {
 				return elo_K_Factor;
+			}
+			@Override
+			public void setK_factor(int k_factor) {
+				elo_K_Factor=k_factor;
 			} 
 			
 		}
