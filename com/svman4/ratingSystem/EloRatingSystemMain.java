@@ -2,7 +2,7 @@
  * 29 Αυγ 2020 - 8:20:47 μ.μ.
 
  */
-package com.svman4.ratingSystem.eloRatingSystem;
+package com.svman4.ratingSystem;
 
 import java.util.Random;
 
@@ -16,8 +16,8 @@ public class EloRatingSystemMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		EloRatingPlayer p1=new SimpleEloPlayer(1000,32);
-		EloRatingPlayer p2=new SimpleEloPlayer(1000,32);
+		IEloRatingPlayer p1=new SimpleEloPlayer(1000,32);
+		IEloRatingPlayer p2=new SimpleEloPlayer(1000,32);
 		EloCalculator calc=new EloCalculator();
 		Random rand=new Random();
 		rand.setSeed(System.currentTimeMillis());

@@ -2,7 +2,7 @@
  * 29 Αυγ 2020 - 7:25:12 μ.μ.
  * 
  */
-package com.svman4.ratingSystem.eloRatingSystem;
+package com.svman4.ratingSystem;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -45,7 +45,7 @@ public class eloCalculatorTest {
 	} // end of test eloCalculatorSecondWin
 	
 
-		class Player implements EloRatingPlayer {
+		class Player implements IEloRatingPlayer {
 			public Player(int elo) {
 				this.elo=elo;
 			}
