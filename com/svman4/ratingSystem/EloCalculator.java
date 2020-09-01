@@ -24,10 +24,16 @@ public class EloCalculator {
 	/**
 	 * Return probability of winning for each player
 	 * 
+	 *
+	 * @return double[] with probability
+	 * 
 	 */
-	public double[] getProbabilityForWinning(IEloRatingPlayer[] players) {
+	public double[] getProbabilityForWinning(IEloRatingPlayer[] players)
+			throws Exception {
 		// calculate transformed Rating for each player.
+
 		int numOfPlayers = players.length;
+
 		double sum = 0;
 		double t[] = new double[numOfPlayers];
 		for (int i = 0; i < numOfPlayers; i++) {
@@ -45,7 +51,8 @@ public class EloCalculator {
 	} // end of getProbabilityForWinning(IEloRatingPlayer()
 
 	/**
-	 * Calculate the final elo rating after the match.
+	 * Calculate the final elo rating after the match.<br>
+	 * A new elo save on Player class (The last one is lost).
 	 * 
 	 * @param winner
 	 *          Select the player who win.<br>
@@ -58,8 +65,8 @@ public class EloCalculator {
 	public void calculateElo(	IEloRatingPlayer player1, IEloRatingPlayer player2,
 														int winner)
 			throws Exception {
-		if ((winner == WINNER_IS_THE_FIRST
-				|| winner == WINNER_IS_THE_SECOND) == false || winner == DRAW) {
+		if ((winner == WINNER_IS_THE_FIRST || winner == WINNER_IS_THE_SECOND
+				|| winner == DRAW) == false) {
 			throw new Exception("invalid winner parameter.");
 		}
 
@@ -96,32 +103,22 @@ public class EloCalculator {
 	/**
 	 * 
 	 * @param players
-	 *          Players on match.
+	 *          Players on match. (Maximum two)
 	 * @param numberOfWinner
 	 *          Player number who win. No draw allow.
 	 */
 	public void calculateElo(IEloRatingPlayer players[], int numberOfWinner)
 			throws Exception {
-
-		if (numberOfWinner < players.length || numberOfWinner > players.length) {
+		// Check if numberOfWinner parameter is valid.
+		if (players == null || players.length > 2) {
+			throw new Exception(
+					"Players array is null or number of players is more than two.");
+		}
+		if (numberOfWinner >= players.length || numberOfWinner > players.length) {
 			throw new Exception("invalid winner parameter.");
 		}
 
-		// calculate transformed Rating for each player.
-		double t[] = new double[players.length];
-		for (int i = 0; i < players.length; i++) {
-			t[i] = Math.pow(10, (players[i].getEloRating() / 400));
-		}
-
-		// calculate expected score for each player.
-		double sumOfTransRating = 0;
-		for (int i = 0; i < players.length; i++) {
-			sumOfTransRating += t[i];
-		}
-		double e[] = new double[players.length];
-		for (int i = 0; i < players.length; i++) {
-			e[i] = t[i] / sumOfTransRating;
-		}
+		double e[] = getProbabilityForWinning(players);
 
 		// calculate a new elo for each player
 		double elo;
@@ -137,7 +134,9 @@ public class EloCalculator {
 
 	/**
 	 * Calculate probability of winning and new Elo Rating (if match complete) for
-	 * each player of match. A new elo save on Player class (The last one is lost.
+	 * each player of match. A new elo save on Player class (The last one is
+	 * lost).
+	 * 
 	 * @version 1.1 (01/9/2020)
 	 * @author Manos Gerakianakis
 	 * 
@@ -153,7 +152,6 @@ public class EloCalculator {
 		double prob[] = getProbabilityForWinning(players);
 		battle.setWinningPropability(prob);
 
-	
 		if (battle.isComplete() == true) {
 
 			int winnerIndex = -1;
@@ -164,6 +162,7 @@ public class EloCalculator {
 			// found the index of winner on players array.
 			for (int i = 0; i < players.length; i++) {
 				if (players[i] == winner) {
+					winnerIndex = i;
 					break;
 				}
 			}
