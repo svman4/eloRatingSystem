@@ -2,7 +2,7 @@
  * 29 Αυγ 2020 - 6:24:05 μ.μ.
  * 
  */
-package com.svman4.ratingSystem;
+package com.svman4.ratingSystem.eloRatingSystem;
 
 /**
  * Simple Elo Calculating Library.
@@ -52,7 +52,7 @@ public class EloCalculator {
 
 	/**
 	 * Calculate the final elo rating after the match.<br>
-	 * A new elo save on Player class (The last one is lost).
+	 * A new elo save on Player class .
 	 * 
 	 * @param winner
 	 *          Select the player who win.<br>
@@ -61,6 +61,7 @@ public class EloCalculator {
 	 *          <br>
 	 *          <b>DRAW </b> if the game its a draw.
 	 * @throws Exception
+	 *           When the the third parameter (winner) is invalid.
 	 */
 	public void calculateElo(	IEloRatingPlayer player1, IEloRatingPlayer player2,
 														int winner)

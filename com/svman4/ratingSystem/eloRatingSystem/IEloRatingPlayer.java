@@ -2,7 +2,7 @@
  * 29 Αυγ 2020 - 6:25:26 μ.μ.
 
  */
-package com.svman4.ratingSystem;
+package com.svman4.ratingSystem.eloRatingSystem;
 
 /**
  * @author Manos Gerakianakis

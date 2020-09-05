@@ -2,7 +2,7 @@
  * 1 Σεπ 2020 - 11:21:44 μ.μ.
  * 
  */
-package com.svman4.ratingSystem;
+package com.svman4.ratingSystem.eloRatingSystem;
 
 import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;

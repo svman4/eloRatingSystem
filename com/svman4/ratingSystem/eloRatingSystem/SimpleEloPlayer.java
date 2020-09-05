@@ -2,7 +2,7 @@
  * 29 Αυγ 2020 - 8:22:00 μ.μ.
  * 
  */
-package com.svman4.ratingSystem;
+package com.svman4.ratingSystem.eloRatingSystem;
 
 /**
  * default k_factor is 32.

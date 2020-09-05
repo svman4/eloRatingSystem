@@ -2,11 +2,11 @@
  * 1 Σεπ 2020 - 12:03:32 π.μ.
  * 
  */
-package com.svman4.ratingSystem;
+package com.svman4.ratingSystem.eloRatingSystem;
 
 /**
  * @author Manos Gerakianakis
- * @date 01/09/2020
+ *  01/09/2020
  */
 public interface IEloRatingBattle {
 
