@@ -2,8 +2,10 @@
  * 29 Αυγ 2020 - 8:20:47 μ.μ.
  * 
  */
-package com.svman4.ratingSystem.eloRatingSystem;
+package com.svman4.ratingSystem.eloRatingSystem.demo;
 
+import com.svman4.ratingSystem.eloRatingSystem.EloCalculator;
+import com.svman4.ratingSystem.eloRatingSystem.IEloRatingPlayer;
 /**
  * 05/09/2020
  * <h1>Demo program for saw the application of eloRatingLibrary.</h1><br>

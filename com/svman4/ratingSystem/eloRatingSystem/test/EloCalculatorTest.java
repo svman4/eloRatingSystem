@@ -2,11 +2,15 @@
  * 1 Σεπ 2020 - 11:21:44 μ.μ.
  * 
  */
-package com.svman4.ratingSystem.eloRatingSystem;
+package com.svman4.ratingSystem.eloRatingSystem.test;
+
 
 import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import com.svman4.ratingSystem.eloRatingSystem.EloCalculator;
+import com.svman4.ratingSystem.eloRatingSystem.IEloRatingBattle;
+import com.svman4.ratingSystem.eloRatingSystem.IEloRatingPlayer;
 
 /**
  * @author Manos Gerakianakis
@@ -30,8 +34,10 @@ public class EloCalculatorTest {
 	 */
 	@Test
 	public void testGetProbabilityForWinning() {
+		
 		Player manos = new Player(2400, 32);
 		Player john = new Player(2000, 32);
+		
 		IEloRatingPlayer[] players=new Player[] {manos,john};
 		double e[]=new double[players.length];
 		try {
@@ -41,6 +47,7 @@ public class EloCalculatorTest {
 			exc.printStackTrace();
 		}
 		int compareValue=Double.compare(0.9090909090909091,e[0]);
+		
 		assertTrue(compareValue==0);
 	}
 
