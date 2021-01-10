@@ -5,18 +5,18 @@
 package com.svman4.ratingSystem.eloRatingSystem.test;
 
 
-import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 import com.svman4.ratingSystem.eloRatingSystem.EloCalculator;
 import com.svman4.ratingSystem.eloRatingSystem.IEloRatingBattle;
 import com.svman4.ratingSystem.eloRatingSystem.IEloRatingPlayer;
+import junit.framework.TestCase;
 
 /**
  * @author Manos Gerakianakis
  *
  */
-public class EloCalculatorTest {
+public class EloCalculatorTest extends TestCase{
 
 	private static EloCalculator calc;
 
