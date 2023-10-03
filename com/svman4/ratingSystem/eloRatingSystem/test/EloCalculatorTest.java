@@ -4,12 +4,13 @@
  */
 package com.svman4.ratingSystem.eloRatingSystem.test;
 
-
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
+
 import com.svman4.ratingSystem.eloRatingSystem.EloCalculator;
 import com.svman4.ratingSystem.eloRatingSystem.IEloRatingBattle;
 import com.svman4.ratingSystem.eloRatingSystem.IEloRatingPlayer;
+
 import junit.framework.TestCase;
 
 /**

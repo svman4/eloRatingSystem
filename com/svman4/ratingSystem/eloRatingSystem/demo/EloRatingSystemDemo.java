@@ -25,10 +25,10 @@ public class EloRatingSystemDemo {
 	 */
 	public static void main(String[] args) {
 		// Create two player with same Elo and k-factor.
-		int firstEloRatingForBothPlayer=1000;
+		int testEloRatingForBothPlayer=1000;
 		
-		IEloRatingPlayer p1 = new SimpleEloPlayer(firstEloRatingForBothPlayer, 32);
-		IEloRatingPlayer p2 = new SimpleEloPlayer(firstEloRatingForBothPlayer, 32);
+		IEloRatingPlayer p1 = new SimpleEloPlayer(testEloRatingForBothPlayer, 32);
+		IEloRatingPlayer p2 = new SimpleEloPlayer(testEloRatingForBothPlayer, 32);
 
 		EloCalculator calc = new EloCalculator();
 		try {
@@ -38,8 +38,8 @@ public class EloRatingSystemDemo {
 			exc.printStackTrace();
 		}
 
-		System.out.println("Elo rating for player p1 go from "+ firstEloRatingForBothPlayer +" to "  + p1.getEloRating());
-		System.out.println("Elo rating for player p2 go from "+ firstEloRatingForBothPlayer +" to "  + p2.getEloRating());
+		System.out.println("Elo rating for player p1 go from "+ testEloRatingForBothPlayer +" to "  + p1.getEloRating());
+		System.out.println("Elo rating for player p2 go from "+ testEloRatingForBothPlayer +" to "  + p2.getEloRating());
 		
 	} // end of main(String[])
 
