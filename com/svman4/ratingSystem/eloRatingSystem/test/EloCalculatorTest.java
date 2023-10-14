@@ -4,7 +4,6 @@
  */
 package com.svman4.ratingSystem.eloRatingSystem.test;
 
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import com.svman4.ratingSystem.eloRatingSystem.EloCalculator;
@@ -19,29 +18,20 @@ import junit.framework.TestCase;
  */
 public class EloCalculatorTest extends TestCase{
 
-	private static EloCalculator calc;
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		calc = new EloCalculator();
-	}
-
 	/**
 	 * Test method for
 	 * {@link com.svman4.ratingSystem.EloCalculator#getProbabilityForWinning(com.svman4.ratingSystem.IEloRatingPlayer[])}.
 	 */
 	@Test
 	public void testGetProbabilityForWinning() {
-		
+		EloCalculator calc=new EloCalculator();
 		Player manos = new Player(2400, 32);
 		Player john = new Player(2000, 32);
 		
 		IEloRatingPlayer[] players=new Player[] {manos,john};
 		double e[]=new double[players.length];
 		try {
+			
 			e=calc.getProbabilityForWinning(players);
 		} catch (Exception exc) {
 			// TODO Auto-generated catch block
@@ -50,6 +40,7 @@ public class EloCalculatorTest extends TestCase{
 		int compareValue=Double.compare(0.9090909090909091,e[0]);
 		
 		assertTrue(compareValue==0);
+		
 	}
 
 	/**
@@ -58,7 +49,7 @@ public class EloCalculatorTest extends TestCase{
 	 */
 	@Test
 	public void testCalculateEloIEloRatingPlayerIEloRatingPlayerInt() {
-
+		EloCalculator calc=new EloCalculator();
 		// Check when winner is the first one
 		Player manos = new Player(2400, 32);
 		Player john = new Player(2000, 32);
@@ -67,9 +58,8 @@ public class EloCalculatorTest extends TestCase{
 		} catch (Exception exc) {
 			System.out.println(exc.getMessage());
 		}
-		// System.out.println(manos.getEloRating());
 		assertTrue(manos.getEloRating() == 2403);
-
+		assertTrue(john.getEloRating()==1997);
 		// check when winner is the second one.
 
 		manos.setEloRating(2400);
@@ -81,7 +71,7 @@ public class EloCalculatorTest extends TestCase{
 		}
 		// System.out.println(manos.getEloRating());
 		assertTrue(manos.getEloRating() == 2371);
-
+		assertTrue(john.getEloRating()==2029);
 		// check when the match is draw.
 		manos.setEloRating(2400);
 		john.setEloRating(2000);
@@ -92,7 +82,140 @@ public class EloCalculatorTest extends TestCase{
 		}
 		// System.out.println(manos.getEloRating());
 		assertTrue(manos.getEloRating() == 2387);
+		assertTrue(john.getEloRating()==2013);
 	}
+	@Test
+	public void testCalculateEloWithKFactor10() {
+		final int INITIAL_MANOS_ELO=1000;
+		final int INITIAL_JOHN_ELO=1005;
+		final int K_FACTOR=10;
+		EloCalculator calc=new EloCalculator();
+		// Check when winner is the first one
+		Player manos = new Player(INITIAL_MANOS_ELO,K_FACTOR);
+		Player john = new Player(INITIAL_JOHN_ELO, K_FACTOR);
+		try {
+			calc.calculateElo(manos, john, EloCalculator.WINNER_IS_THE_FIRST);
+		} catch (Exception exc) {
+			System.out.println(exc.getMessage());
+		}
+		assertTrue(manos.getEloRating() == 1005);
+		assertTrue(john.getEloRating()==1000);
+
+		// check when winner is the second one.
+
+		manos.setEloRating(INITIAL_MANOS_ELO);
+		john.setEloRating(INITIAL_JOHN_ELO);
+		try {
+			calc.calculateElo(manos, john, EloCalculator.WINNER_IS_THE_SECOND);
+		} catch (Exception exc) {
+			System.out.println(exc.getMessage());
+		}
+		// System.out.println(manos.getEloRating());
+		assertTrue(manos.getEloRating() == 995);
+		assertTrue(john.getEloRating()==1010);
+
+		// check when the match is draw.
+		manos.setEloRating(INITIAL_MANOS_ELO);
+		john.setEloRating(INITIAL_JOHN_ELO);
+		try {
+			calc.calculateElo(manos, john, EloCalculator.DRAW);
+		} catch (Exception exc) {
+			System.out.println(exc.getMessage());
+		}
+		// System.out.println(manos.getEloRating());
+		assertTrue(manos.getEloRating() == 1000);
+		assertTrue(john.getEloRating()==1005);
+	}
+
+	@Test
+	public void testCalculateEloWithSmallKFactor5() {
+		final int INITIAL_MANOS_ELO=1000;
+		final int INITIAL_JOHN_ELO=1005;
+		final int K_FACTOR=5;
+		EloCalculator calc=new EloCalculator();
+		// Check when winner is the first one
+		Player manos = new Player(INITIAL_MANOS_ELO,K_FACTOR);
+		Player john = new Player(INITIAL_JOHN_ELO, K_FACTOR);
+		try {
+			calc.calculateElo(manos, john, EloCalculator.WINNER_IS_THE_FIRST);
+		} catch (Exception exc) {
+			System.out.println(exc.getMessage());
+		}
+		assertTrue(manos.getEloRating() == 1003);
+		assertTrue(john.getEloRating()==1002);
+		
+		
+
+		// check when winner is the second one.
+
+		manos.setEloRating(INITIAL_MANOS_ELO);
+		john.setEloRating(INITIAL_JOHN_ELO);
+		try {
+			calc.calculateElo(manos, john, EloCalculator.WINNER_IS_THE_SECOND);
+		} catch (Exception exc) {
+			System.out.println(exc.getMessage());
+		}
+		// System.out.println(manos.getEloRating());
+		assertTrue(manos.getEloRating() == 998);
+		assertTrue(john.getEloRating()==1007);
+		// check when the match is draw.
+		manos.setEloRating(INITIAL_MANOS_ELO);
+		john.setEloRating(INITIAL_JOHN_ELO);
+		try {
+			calc.calculateElo(manos, john, EloCalculator.DRAW);
+		} catch (Exception exc) {
+			System.out.println(exc.getMessage());
+		}
+		// System.out.println(manos.getEloRating());
+		assertTrue(manos.getEloRating() == 1000);
+		assertTrue(john.getEloRating()==1005);
+	}
+
+	@Test
+	public void testCalculateEloWithBigDifference() {
+		final int INITIAL_MANOS_ELO=2500;
+		final int INITIAL_JOHN_ELO=1000;
+		final int K_FACTOR=40;
+		
+		EloCalculator calc=new EloCalculator();
+		// Check when winner is the first one
+		Player manos = new Player(INITIAL_MANOS_ELO,K_FACTOR);
+		Player john = new Player(INITIAL_JOHN_ELO, K_FACTOR);
+		try {
+			calc.calculateElo(manos, john, EloCalculator.WINNER_IS_THE_FIRST);
+		} catch (Exception exc) {
+			System.out.println(exc.getMessage());
+		}
+		assertTrue(manos.getEloRating() == INITIAL_MANOS_ELO);
+		assertTrue(john.getEloRating()==INITIAL_JOHN_ELO);
+		
+
+		// check when winner is the second one.
+
+		manos.setEloRating(INITIAL_MANOS_ELO);
+		john.setEloRating(INITIAL_JOHN_ELO);
+		try {
+			calc.calculateElo(manos, john, EloCalculator.WINNER_IS_THE_SECOND);
+		} catch (Exception exc) {
+			System.out.println(exc.getMessage());
+		}
+		// System.out.println(manos.getEloRating());
+		assertTrue(manos.getEloRating() == (INITIAL_MANOS_ELO-40));
+		assertTrue(john.getEloRating()==(INITIAL_JOHN_ELO+40));
+
+		// check when the match is draw.
+		manos.setEloRating(INITIAL_MANOS_ELO);
+		john.setEloRating(INITIAL_JOHN_ELO);
+		try {
+			calc.calculateElo(manos, john, EloCalculator.DRAW);
+		} catch (Exception exc) {
+			System.out.println(exc.getMessage());
+		}
+		// System.out.println(manos.getEloRating());
+		assertTrue(manos.getEloRating() == (INITIAL_MANOS_ELO-20));
+		assertTrue(john.getEloRating()==(INITIAL_JOHN_ELO+20));
+	}
+
 
 	/**
 	 * Test method for
@@ -100,6 +223,7 @@ public class EloCalculatorTest extends TestCase{
 	 */
 	@Test
 	public void testCalculateEloIEloRatingPlayerArrayInt() {
+		EloCalculator calc=new EloCalculator();
 		Player manos = new Player(2400, 32);
 		Player john = new Player(2000, 32);
 		Player players[] = new Player[] { manos, john };
@@ -118,6 +242,7 @@ public class EloCalculatorTest extends TestCase{
 	 */
 	@Test
 	public void testCalculateEloIEloRatingBattleWhenBattleNotComplete() {
+		EloCalculator calc=new EloCalculator();
 		Player manos = new Player(2400, 32);
 		Player john = new Player(2000, 32);
 		Player players[] = new Player[] { manos, john };
@@ -143,6 +268,7 @@ public class EloCalculatorTest extends TestCase{
 	 */
 	@Test
 	public void testCalculateEloIEloRatingBattleWhenBattleComplete() {
+		EloCalculator calc=new EloCalculator();
 		Player manos = new Player(2400, 32);
 		Player john = new Player(2000, 32);
 		Player players[] = new Player[] { manos, john };

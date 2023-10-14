@@ -37,7 +37,7 @@ public class EloCalculator {
 		double sum = 0;
 		double t[] = new double[numOfPlayers];
 		for (int i = 0; i < numOfPlayers; i++) {
-			t[i] = Math.pow(10, players[i].getEloRating() / 400);
+			t[i] = Math.pow(10, (((double) players[i].getEloRating())) / 400);
 			sum += t[i];
 		}
 
@@ -70,10 +70,14 @@ public class EloCalculator {
 				|| winner == DRAW) == false) {
 			throw new Exception("invalid winner parameter.");
 		}
+		double player1Rating=player1.getEloRating();
+		double player2Rating=player2.getEloRating();
+		double player1KFactor=player1.getK_Factor();
+		double player2KFactor=player2.getK_Factor();
 
 		// calculate transformed Rating for each player.
-		double t1 = Math.pow(10, (player1.getEloRating() / 400));
-		double t2 = Math.pow(10, (player2.getEloRating() / 400));
+		double t1 = Math.pow(10, (player1Rating / 400));
+		double t2 = Math.pow(10, (player2Rating / 400));
 
 		// calculate expected score for each player.
 		double e1 = t1 / (t1 + t2);
@@ -95,8 +99,8 @@ public class EloCalculator {
 		}
 
 		// calculate a new elo for each player
-		double elo1 = player1.getEloRating() + player1.getK_Factor() * (s1 - e1);
-		double elo2 = player2.getEloRating() + player2.getK_Factor() * (s2 - e2);
+		double elo1 = player1Rating + player1KFactor * (s1 - e1);
+		double elo2 = player2Rating + player2KFactor * (s2 - e2);
 		player1.setEloRating((int) Math.round(elo1));
 		player2.setEloRating((int) Math.round(elo2));
 	} // end of calculateElo
