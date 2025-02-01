@@ -128,10 +128,12 @@ public class EloCalculator {
 		// calculate a new elo for each player
 		double elo;
 		for (int i = 0; i < players.length; i++) {
+			double playerEloRating=players[i].getEloRating();
+			double playersKFactor=players[i].getK_Factor();
 			if (i == numberOfWinner) {
-				elo = players[i].getEloRating() + players[i].getK_Factor() * (1 - e[i]);
+				elo =playerEloRating + playersKFactor * (1 - e[i]);
 			} else {
-				elo = players[i].getEloRating() + players[i].getK_Factor() * (0 - e[i]);
+				elo = playerEloRating + playersKFactor * (0 - e[i]);
 			}
 			players[i].setEloRating((int) Math.round(elo));
 		}
